@@ -9,12 +9,12 @@ public class ObstacleSpawner : MonoBehaviour
     [SerializeField] float spawnWidth = 4f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         StartCoroutine(SpawnObstacleRoutine());
     }
 
-    IEnumerator SpawnObstacleRoutine()
+    private IEnumerator SpawnObstacleRoutine()
     {
         while (true)
         {
@@ -23,11 +23,5 @@ public class ObstacleSpawner : MonoBehaviour
             yield return new WaitForSeconds(obstacleSpawnTime);
             Instantiate(obstaclePrefab, spawnPosition, Random.rotation, obstacleParent);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

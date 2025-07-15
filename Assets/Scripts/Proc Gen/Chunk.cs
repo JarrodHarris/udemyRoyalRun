@@ -8,9 +8,8 @@ public class Chunk : MonoBehaviour
     [SerializeField] GameObject coinPrefab;
     [SerializeField] float appleSpawnChance = 0.3f;
     [SerializeField] float coinSpawnChance = 0.5f;
-    [SerializeField] float[] lanes = { -2.65f, 0f, 2.65f };  //positions on the x-axis to determine the left, middle and right lane
-    [SerializeField] float coinOffset = 0.5f;   //NOT USED ATM
-    [SerializeField] int potentialCoinAmount = 5; 
+    [SerializeField] float coinSeperationLength = 2f;
+    [SerializeField] float[] lanes = { -2.65f, 0f, 2.65f };  //positions on the x-axis to determine the left, middle and right lane 
     
     List<int> availableLanes = new List<int> { 0, 1, 2 };
 
@@ -51,17 +50,37 @@ public class Chunk : MonoBehaviour
 
     private void SpawnCoins()
     {
+        //MY IMPLEMENTATION
+        // if (availableLanes.Count <= 0) return;
+
+        // int selectedLane = SelectLane();
+        // int potentialCoinAmount = 6;
+        // int coinsToSpawn = Random.Range(1, potentialCoinAmount);
+
+        // for (int i = 0; i <= coinsToSpawn; i++)
+        // {
+        //     if (Random.value > coinSpawnChance) break;
+
+        //     Vector3 spawnPosition = new Vector3(lanes[selectedLane], transform.position.y, transform.position.z - i);
+        //     Instantiate(coinPrefab, spawnPosition, Quaternion.identity, this.transform);
+        // }
+
+
+        //UDEMY IMPLEMENTATION
+        if (Random.value > coinSpawnChance) return;
         if (availableLanes.Count <= 0) return;
 
         int selectedLane = SelectLane();
-        int coinsToSpawn = Random.Range(0, potentialCoinAmount);
 
-        for (int i = 0; i <= coinsToSpawn; i++)
+        int maxCoinsToSpawn = 6;
+        int coinsToSpawn = Random.Range(1, maxCoinsToSpawn);
+        float topOfChunkZPos = transform.position.z + (coinSeperationLength * 2f);
+
+        for (int i = 0; i < coinsToSpawn; i++)
         {
-            if (Random.value > coinSpawnChance) break;
-
-            Vector3 spawnPosition2 = new Vector3(lanes[selectedLane], transform.position.y, transform.position.z - i);
-            Instantiate(coinPrefab, spawnPosition2, Quaternion.identity, this.transform);
+            float spawnPositionZ = topOfChunkZPos - (i * coinSeperationLength);
+            Vector3 spawnPosition = new Vector3(lanes[selectedLane], transform.position.y, spawnPositionZ);
+            Instantiate(coinPrefab, spawnPosition, Quaternion.identity, this.transform);
         }
     }
 

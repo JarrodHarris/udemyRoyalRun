@@ -8,6 +8,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] Transform chunkParent;
     [SerializeField] float chunkLength = 10f;
     [SerializeField] float moveSpeed = 8f;
+    [SerializeField] float minMoveSpeed = 2f;
     List<GameObject> chunks = new List<GameObject>();
     private void Start()
     {
@@ -17,6 +18,17 @@ public class LevelGenerator : MonoBehaviour
     private void Update()
     {
         MoveChunks();
+    }
+
+    public void ChangeChunkMoveSpeed(float speedAmount)
+    {
+        moveSpeed += speedAmount;
+
+        if (moveSpeed < minMoveSpeed)
+        {
+            moveSpeed = minMoveSpeed;
+        }
+        Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, Physics.gravity.z -speedAmount);    //adjusting Project Settings -> Physics -> Settings, particularly the z value because when the player picks up a lot of apples, the obstacles falling react in a weird manner due to the gravity physics. This is to regulate it
     }
 
     // Instantiate with 'chunkParent' automatically makes these new objects become children of that object.
