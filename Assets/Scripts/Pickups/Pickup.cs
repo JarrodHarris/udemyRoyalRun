@@ -1,7 +1,9 @@
+using UnityEditor.EditorTools;
 using UnityEngine;
 
 public abstract class Pickup : MonoBehaviour
 {
+    [Tooltip("rotation speed of pickups on the y-axis")]
     [SerializeField] float rotationSpeed = 100f;
     const string playerString = "Player";
 

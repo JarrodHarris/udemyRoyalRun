@@ -10,7 +10,9 @@ public class Chunk : MonoBehaviour
     [SerializeField] float coinSpawnChance = 0.5f;
     [SerializeField] float coinSeperationLength = 2f;
     [SerializeField] float[] lanes = { -2.65f, 0f, 2.65f };  //positions on the x-axis to determine the left, middle and right lane 
-    
+
+    LevelGenerator levelGenerator;
+    ScoreboardManager scoreboardManager;
     List<int> availableLanes = new List<int> { 0, 1, 2 };
 
 
@@ -19,6 +21,12 @@ public class Chunk : MonoBehaviour
         SpawnFences();
         SpawnApple();
         SpawnCoins();
+    }
+
+    public void Init(LevelGenerator levelGenerator, ScoreboardManager scoreboardManager)
+    {
+        this.levelGenerator = levelGenerator;
+        this.scoreboardManager = scoreboardManager;
     }
 
     //Line 23, RemoveAt(int index) function removes the element at that position but also reorganizes the remaning elements position/index
@@ -45,7 +53,8 @@ public class Chunk : MonoBehaviour
         int selectedLane = SelectLane();
 
         Vector3 spawnPosition = new Vector3(lanes[selectedLane], transform.position.y, transform.position.z);    //randomising which lane to spawn the fence
-        Instantiate(applePrefab, spawnPosition, Quaternion.identity, this.transform);
+        Apple newApple = Instantiate(applePrefab, spawnPosition, Quaternion.identity, this.transform).GetComponent<Apple>();;
+        newApple.Init(levelGenerator);
     }
 
     private void SpawnCoins()
@@ -80,7 +89,8 @@ public class Chunk : MonoBehaviour
         {
             float spawnPositionZ = topOfChunkZPos - (i * coinSeperationLength);
             Vector3 spawnPosition = new Vector3(lanes[selectedLane], transform.position.y, spawnPositionZ);
-            Instantiate(coinPrefab, spawnPosition, Quaternion.identity, this.transform);
+            Coin newCoin = Instantiate(coinPrefab, spawnPosition, Quaternion.identity, this.transform).GetComponent<Coin>();
+            newCoin.Init(scoreboardManager);
         }
     }
 
