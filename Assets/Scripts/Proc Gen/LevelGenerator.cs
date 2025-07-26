@@ -1,11 +1,13 @@
 using System.Collections.Generic;
+using UnityEditor.EditorTools;
 using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
     [Header("Referencees")]
     [SerializeField] CameraController cameraController;
-    [SerializeField] GameObject chunkPrefab;
+    [SerializeField] GameObject[] chunkPrefabs;
+    [SerializeField] GameObject checkpointChunkPrefab;
 
     [Tooltip("Empty game object to group chunks into this parent object")]
     [SerializeField] Transform chunkParent;
@@ -19,6 +21,8 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] float moveSpeed = 8f;
     [SerializeField] float minMoveSpeed = 2f;
     [SerializeField] float maxMoveSpeed = 20f;
+    [Tooltip("Sets how many 'chunks' need to spawn before a checkpoint 'chunk' is spawned")]
+    [SerializeField] int checkpointChunkInterval = 8;
 
     [Header("Physics Gravity Settings")]
     [Tooltip("Minimum gravity setting on the z-axis")]
@@ -28,6 +32,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] float maxGravityZ = -2f;
 
     List<GameObject> chunks = new List<GameObject>();
+    int chunksSpawned = 0;
     private void Start()
     {
         SpawnStartingChunks();
@@ -85,9 +90,27 @@ public class LevelGenerator : MonoBehaviour
 
     private void SpawnChunk()
     {
-        GameObject newChunkGO = Instantiate(chunkPrefab, new Vector3(0f, 0f, (chunks.Count - 1) * chunkLength), Quaternion.identity, chunkParent);
+        GameObject chunkToSpawn = DetermineChunkToSpawn();
+        GameObject newChunkGO = Instantiate(chunkToSpawn, new Vector3(0f, 0f, (chunks.Count - 1) * chunkLength), Quaternion.identity, chunkParent);
         chunks.Add(newChunkGO);
         Chunk newChunk = newChunkGO.GetComponent<Chunk>();
         newChunk.Init(this, scoreboardManager);
+
+        chunksSpawned++;
+    }
+
+    private GameObject DetermineChunkToSpawn()
+    {
+        GameObject chunkToSpawn;
+        if (chunksSpawned % checkpointChunkInterval == 0 && chunksSpawned != 0)
+        {
+            chunkToSpawn = checkpointChunkPrefab;
+        }
+        else
+        {
+            chunkToSpawn = chunkPrefabs[Random.Range(0, chunkPrefabs.Length)];
+        }
+
+        return chunkToSpawn;
     }
 }

@@ -6,10 +6,23 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlayerController playerController;
     [SerializeField] TMP_Text timeText;
     [SerializeField] GameObject gameOverText;
-    [SerializeField] float startTime = 5f;
+    [SerializeField] float startTime = 30f;
 
     float timeLeft;
     bool gameOver = false;
+
+    public bool GameOver
+    {
+        get { return gameOver; }
+        // set { gameOver = value; }    //NOT NEEDED
+    }
+
+    public void IncreaseTime(float amountOfTime)
+    {
+        if (gameOver) return;
+
+        timeLeft += amountOfTime;
+    }
 
     private void Start()
     {
@@ -30,11 +43,11 @@ public class GameManager : MonoBehaviour
 
         if (timeLeft <= 0f)
         {
-            GameOver();
+            PlayerGameOver();
         }
     }
 
-    void GameOver()
+    private void PlayerGameOver()
     {
         gameOver = true;
         playerController.enabled = false;   //to disable the player input script
