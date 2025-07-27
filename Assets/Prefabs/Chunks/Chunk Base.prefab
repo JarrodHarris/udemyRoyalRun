@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4522283741687757733}
   - component: {fileID: 656843096792913208}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 2397457379700770992}
   - component: {fileID: -6964501576666675386}
   m_Layer: 0
-  m_Name: Chunk Prefab
+  m_Name: Chunk Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

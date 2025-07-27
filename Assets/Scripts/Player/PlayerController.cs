@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -7,19 +6,29 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float xClampRange = 4f;
     [SerializeField] float zClampRange = 3f;
+    GameManager gameManager;
     Vector2 movement;
     Rigidbody rb;
 
     private void Awake()
     {
         rb = this.GetComponent<Rigidbody>();
+        gameManager = FindAnyObjectByType<GameManager>();
     }
 
     private void FixedUpdate()
     {
         HandleMovement();
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            gameManager.ChangeFogVisibility();
+        }
+    }
+
     public void Move(InputAction.CallbackContext context)
     {
         movement = context.ReadValue<Vector2>();

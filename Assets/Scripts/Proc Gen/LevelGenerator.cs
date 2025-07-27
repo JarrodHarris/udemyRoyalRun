@@ -79,7 +79,7 @@ public class LevelGenerator : MonoBehaviour
 
 
             //Checking to destroy chunk once its reached past the camera
-            if (chunk.transform.position.z <= Camera.main.transform.position.z - chunkLength)   //- chunkLength is an offset variable
+            if (chunk.transform.position.z <= Camera.main.transform.position.z - chunkLength)   //- chunkLength is being used as an offset variable
             {
                 chunks.Remove(chunk);
                 Destroy(chunk);

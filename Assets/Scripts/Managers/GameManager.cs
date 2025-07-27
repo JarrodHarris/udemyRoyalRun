@@ -7,9 +7,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text timeText;
     [SerializeField] GameObject gameOverText;
     [SerializeField] float startTime = 30f;
+    [SerializeField] ParticleSystem[] fogParticleSystems;
 
     float timeLeft;
     bool gameOver = false;
+    bool fogVisivility = true;
 
     public bool GameOver
     {
@@ -22,6 +24,16 @@ public class GameManager : MonoBehaviour
         if (gameOver) return;
 
         timeLeft += amountOfTime;
+    }
+
+    public void ChangeFogVisibility()
+    {
+        foreach (ParticleSystem fog in fogParticleSystems)
+        {
+            var emissionModule = fog.GetComponent<ParticleSystem>().emission;
+            emissionModule.enabled = !fogVisivility;
+        }
+        fogVisivility = !fogVisivility;
     }
 
     private void Start()
