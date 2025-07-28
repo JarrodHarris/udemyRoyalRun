@@ -5,7 +5,10 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] PlayerController playerController;
     [SerializeField] TMP_Text timeText;
-    [SerializeField] GameObject gameOverText;
+    // [SerializeField] GameObject gameOverText;    //UDEMY IMPLEMENTATION
+    [SerializeField] TMP_Text gameOverText;
+    [SerializeField] TMP_Text scoreText;
+    [Tooltip("Amount of time the game will start with")]
     [SerializeField] float startTime = 30f;
     [SerializeField] ParticleSystem[] fogParticleSystems;
 
@@ -63,7 +66,13 @@ public class GameManager : MonoBehaviour
     {
         gameOver = true;
         playerController.enabled = false;   //to disable the player input script
-        gameOverText.SetActive(true);
+
+        // gameOverText.SetActive(true);    //UDEMY IMPLEMENTATION
+        gameOverText.text = "Game Over \n" + scoreText.text;
+
+        scoreText.text = "";
+        timeText.text = "";
+
         Time.timeScale = .1f;   //changes the overall time of the game. Usually running at 1f
     }
 }

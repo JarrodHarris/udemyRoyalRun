@@ -192,7 +192,7 @@ MonoBehaviour:
   fencePrefab: {fileID: 7814689663080715175, guid: 9ce7f23f46e1cdc4388cb3e099f22ee8, type: 3}
   applePrefab: {fileID: 3108519284697045028, guid: 33829ce81ccefa349a4d6dee792376c9, type: 3}
   coinPrefab: {fileID: 2415346195796940579, guid: 7a484af3cbd1e5642a0abc3dad6a6851, type: 3}
-  appleSpawnChance: 0.3
+  appleSpawnChance: 0.18
   coinSpawnChance: 50
   coinSeperationLength: 2
   lanes:
@@ -279,7 +279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3999058980050925843, guid: fd377e6b49a4d1040ba1cf2817673455, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.4
+      value: -5.14
       objectReference: {fileID: 0}
     - target: {fileID: 3999058980050925843, guid: fd377e6b49a4d1040ba1cf2817673455, type: 3}
       propertyPath: m_LocalPosition.y
@@ -287,7 +287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3999058980050925843, guid: fd377e6b49a4d1040ba1cf2817673455, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3999058980050925843, guid: fd377e6b49a4d1040ba1cf2817673455, type: 3}
       propertyPath: m_LocalRotation.w
@@ -437,7 +437,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3999058980050925843, guid: fd377e6b49a4d1040ba1cf2817673455, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.4
+      value: 5.24
       objectReference: {fileID: 0}
     - target: {fileID: 3999058980050925843, guid: fd377e6b49a4d1040ba1cf2817673455, type: 3}
       propertyPath: m_LocalPosition.y

@@ -5085,7 +5085,7 @@ MonoBehaviour:
   collisionParticleSystem: {fileID: 1463898554218388238}
   boulderSmashAudioSource: {fileID: 7882769267632404398}
   shakeModifier: 10
-  triggerFXTimer: 1
+  collisionCooldown: 1
 --- !u!82 &7882769267632404398
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5099,13 +5099,13 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: b025affaac4800d46a478597f6621056, type: 3}
   m_Resource: {fileID: 8300000, guid: b025affaac4800d46a478597f6621056, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.385
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 90
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

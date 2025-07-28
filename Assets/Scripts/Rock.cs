@@ -10,7 +10,7 @@ public class Rock : MonoBehaviour
     [Tooltip("Timer for how long in between replaying the SFX & VFX")]
     [SerializeField] float collisionCooldown = 1f;
     CinemachineImpulseSource cinemachineImpulseSource;
-    float collisionTimer = 0f;
+    float collisionTimer = 1f;
 
     private void Awake()
     {
